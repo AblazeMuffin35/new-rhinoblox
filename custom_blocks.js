@@ -2077,3 +2077,57 @@ javascript.javascriptGenerator.forBlock['web_removelocalstorage'] = function(blo
     var code = `localStorage.removeItem(${value_name});\n`;
     return code;
 };
+
+Blockly.Blocks['canvas_setcursor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("set cursor to")
+          .appendField(new Blockly.FieldDropdown([["auto", "auto"], ["default", "default"], ["none", "none"], ["context-menu", "context-menu"], ["help", "help"], ["pointer", "pointer"], ["progress", "progress"], ["wait", "wait"], ["cell", "cell"], ["crosshair", "crosshair"], ["text", "text"], ["vertical-text", "vertical-text"], ["alias", "alias"], ["copy", "copy"], ["move", "move"], ["no-drop", "no-drop"], ["not-allowed", "not-allowed"], ["all-scroll", "all-scroll"], ["col-resize", "col-resize"], ["row-resize", "row-resize"], ["n-resize", "n-resize"], ["e-resize", "e-resize"], ["s-resize", "s-resize"], ["w-resize", "w-resize"], ["ne-resize", "ne-resize"], ["nw-resize", "nw-resize"], ["se-resize", "se-resize"], ["sw-resize", "sw-resize"], ["ew-resize", "ew-resize"], ["ns-resize", "ns-resize"], ["nesw-resize", "nesw-resize"], ["nwse-resize", "nwse-resize"], ["zoom-in", "zoom-in"], ["zoom-out", "zoom-out"], ["grab", "grab"], ["grabbing", "grabbing"]]), "CURSOR");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+
+javascript.javascriptGenerator.forBlock['canvas_setcursor'] = function(block, generator) {
+    var dropdown_cursor = block.getFieldValue('CURSOR');
+    var code = `setCanvasCursor("${dropdown_cursor}");\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_getcursor'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("get current cursor");
+      this.setOutput(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+
+javascript.javascriptGenerator.forBlock['canvas_getcursor'] = function(block, generator) {
+    var code = 'getCanvasCursor()';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_setcursorurl'] = {
+    init: function() {
+      this.appendValueInput("URL")
+          .setCheck("String")
+          .appendField("set cursor to URL");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+
+javascript.javascriptGenerator.forBlock['canvas_setcursorurl'] = function(block, generator) {
+    var value_url = generator.valueToCode(block, 'URL', javascript.Order.ATOMIC);
+    var code = `setCanvasCursor(\`url(\$\{${value_url}\}), auto\`);\n`;
+    return code;
+};

@@ -37,6 +37,7 @@
             <a style="cursor: pointer" onclick="loadExampleProject(examples[2])">Noise Generator</a>
             <a style="cursor: pointer" onclick="loadExampleProject(examples[3])">Random Triangles</a>
             <a style="cursor: pointer" onclick="loadExampleProject(examples[4])">RhinoBlox Logo</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[5])">Dragging</a>
           </div>
         </div> 
       </div>
@@ -711,6 +712,15 @@
           <block type="canvas_checkkeydown"></block>
           <block type="canvas_lastkey"></block>
           <block type="canvas_mousedowntime"></block>
+          <block type="canvas_getcursor"></block>
+          <block type="canvas_setcursor"></block>
+          <block type="canvas_setcursorurl">
+            <value name="URL">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
         </category>
         <category name="Canvas" colour="60">
           <block type="canvas_image"></block>

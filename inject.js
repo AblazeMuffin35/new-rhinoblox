@@ -423,3 +423,13 @@ function loadExampleProject(project) {
     let loadedJson = JSON.parse(project);
     Blockly.serialization.workspaces.load(loadedJson, Blockly.getMainWorkspace());
 }
+
+document.getElementById("canvasContainer").style.cursor = "auto";
+
+function setCanvasCursor(cursor) {
+    document.getElementById("canvasContainer").style.cursor = cursor;
+}
+
+function getCanvasCursor() {
+    return document.getElementById("canvasContainer").style.cursor;
+}
