@@ -2131,3 +2131,25 @@ javascript.javascriptGenerator.forBlock['canvas_setcursorurl'] = function(block,
     var code = `setCanvasCursor(\`url(\$\{${value_url}\}), auto\`);\n`;
     return code;
 };
+
+Blockly.Blocks['types_convertbase'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck("Number")
+          .appendField("convert");
+      this.appendValueInput("BASE")
+          .setCheck("Number")
+          .appendField("to base");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour(90);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['types_convertbase'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_base = generator.valueToCode(block, 'BASE', javascript.Order.ATOMIC);
+    var code = `(${value_input}).toString(${value_base})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
