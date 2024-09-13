@@ -87,9 +87,38 @@ function getCode() {
     return Blockly.JavaScript.workspaceToCode(workspace);
 }
 function runCodeWithConsole() {
-    var result = eval(getCode());
-    if (($("#console").html().match(/\<br\>/g) || []).length > 23) { $("#console").html(""); }
-    if (result != undefined) { $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span>" + result + "<br>"); console.push(result);}
+    try {
+        var result = eval(getCode());
+        if (($("#console").html().match(/\<br\>/g) || []).length > 23) { $("#console").html(""); }
+        if (debugger_on) {
+            switch (typeof result) {
+                case "string":
+                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #ce916c'>'" + result + "'</span><br>"); console.push(result);
+                    break;
+                case "number":
+                case "bigint":
+                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #b5cea8'>" + result + "</span><br>"); console.push(result);
+                    break;
+                case "boolean":
+                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #398cd6'>" + result + "</span><br>"); console.push(result);
+                    break;
+                default:
+                    if (result == undefined || result == null) {
+                        $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #505050'>" + result + "</span><br>"); console.push(result);
+                    }
+                    else if (result instanceof Array) {
+                        $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #4ec994'>" + JSON.stringify(result) + "</span><br>"); console.push(JSON.stringify(result));
+                    }
+                    else {
+                        $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #4ec994'>" + result + "</span><br>"); console.push(result);
+                    }
+            }
+        }
+    }
+    catch (error) {
+        if (($("#console").html().match(/\<br\>/g) || []).length > 23) { $("#console").html(""); }
+        if (debugger_on) { $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #ec5959'>" + error + "</span><br>"); console.push(error);}
+    }
 }
 
 var console_open = true;
@@ -102,6 +131,17 @@ function changeConsole() {
     else{
         $("#console").attr("hidden", true);
         $('#canvasContainer').removeAttr('hidden');
+    }
+}
+
+var debugger_on = true;
+function toggleDebugger() {
+    debugger_on = !debugger_on;
+    if (debugger_on){
+        document.getElementById("debuggerButton").src = "resources/debugger_on.png";
+    }
+    else{
+        document.getElementById("debuggerButton").src = "resources/debugger_off.png";
     }
 }
 

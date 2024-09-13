@@ -54,17 +54,8 @@
           <button class=controlButton style="margin-right: 0px; margin-left: 0px; padding: 0px" onclick="clearConsole(); clearCanvas(); forceDeleteTimers()">
             <img draggable="false" class="controlButtonImg" width="19px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxNCAxNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTQgMTQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRUM1OTU5O3N0cm9rZTojQjg0ODQ4O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZDtzdHJva2UtbWl0ZXJsaW1pdDoxMDt9Cjwvc3R5bGU+Cjxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iNC4zLDAuNSA5LjcsMC41IDEzLjUsNC4zIDEzLjUsOS43IDkuNywxMy41IDQuMywxMy41IDAuNSw5LjcgMC41LDQuMyAiLz4KPC9zdmc+Cg==">
           </button>
-          <button hidden class=controlButton style="margin-left: 0.8px; padding: 0px" onclick='
-          navigator.clipboard.writeText(getCode());
-          Toastify({
-            text: "JavaScript code copied!",
-            duration: 1000,
-            style: {
-              background: "linear-gradient(to right, #689F38, #8BC34A)",
-            },
-          }).showToast();
-          '>
-            <img draggable="false" class="controlButtonImg" src="resources/code.png" width="24px">
+          <button class=controlButton style="margin-left: 0.8px; padding: 0px" onclick="toggleDebugger()">
+            <img id="debuggerButton" draggable="false" class="controlButtonImg" src="resources/debugger_on.png" width="24px">
           </button>
           <button class=controlButton style="padding: 0px; float: right" onclick="changeConsole()">
             <img draggable="false" class="controlButtonImg" src="resources/canvas.png" width="19px">
