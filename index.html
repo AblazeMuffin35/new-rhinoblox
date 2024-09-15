@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.js" integrity="sha512-ZHzbWDQKpcZxIT9l5KhcnwQTidZFzwK/c7gpUUsFvGjEsxPusdUCyFxjjpc7e/Wj7vLhfMujNx7COwOmzbn+2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.css" integrity="sha512-kT0v1BxcibEO2Yc+6Z3W1gNsN+2cZ/U6uITqHhIJl8SAvt9vpO8llugdCPXA7cCnp8G1xbuSqHNMRaR3Zlz9yA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.4.2/chroma.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/autocorrect@1.2.0/index.js"></script>
@@ -223,6 +224,56 @@
               </shadow>
             </value>
           </block>
+        </category>
+        <category name="Chroma" colour="#9e4d45">
+          <block type="chroma_color"></block>
+          <block type="chroma_chroma">
+            <value name="COLOR">
+              <shadow type="text"></shadow>
+            </value>
+          </block>
+          <block type="chroma_3valueinput">
+            <value name="ONE">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="TWO">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="THREE">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_valid">
+            <value name="COLOR">
+              <shadow type="text"></shadow>
+            </value>
+          </block>
+          <block type="chroma_random"></block>
+          <block type="chroma_mix">
+            <value name="ONE">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
+              </shadow>
+            </value>
+            <value name="TWO">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#000000</field>
+              </shadow>
+            </value>
+            <value name="RATIO">
+              <shadow type="math_number">
+                <field name="NUM">0.5</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_average"></block>
+          <block type="chroma_weightedaverage"></block>
         </category>
         <category name="Logic" categorystyle="logic_category">
           <block type="controls_if"></block>
@@ -561,7 +612,7 @@
             </value>
           </block>
         </category>
-        <category name="Colour" categorystyle="colour_category">
+        <!-- <category name="Colour" categorystyle="colour_category">
           <block type="colour_picker"></block>
           <block type="colour_random"></block>
           <block type="colour_rgb">
@@ -598,7 +649,7 @@
               </shadow>
             </value>
           </block>
-        </category>
+        </category> -->
         <!-- <category name="Music" colour="190">
           <block type="music_pitch_field"></block>
           <block type="music_transpose">

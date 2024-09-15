@@ -2153,3 +2153,180 @@ javascript.javascriptGenerator.forBlock['types_convertbase'] = function(block, g
     var code = `(${value_input}).toString(${value_base})`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+Blockly.Blocks['chroma_chroma'] = {
+    init: function() {
+      this.appendValueInput("COLOR")
+          .setCheck(null)
+          .appendField("color");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_chroma'] = function(block, generator) {
+    var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
+    var code = `chroma(${value_color})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_valid'] = {
+    init: function() {
+      this.appendValueInput("COLOR")
+          .setCheck(null)
+          .appendField("is");
+      this.appendDummyInput()
+          .appendField("a valid color?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_valid'] = function(block, generator) {
+    var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
+    var code = `chroma.valid(${value_color})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_3valueinput'] = {
+    init: function() {
+      this.appendValueInput("ONE")
+          .setCheck("Number")
+          .appendField("color from");
+      this.appendValueInput("TWO")
+          .setCheck("Number");
+      this.appendValueInput("THREE")
+          .setCheck("Number");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldDropdown([["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"], ["cmy","cmy"], ["rgb","rgb"], ["gl","gl"]]), "TYPE");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_3valueinput'] = function(block, generator) {
+    var value_one = generator.valueToCode(block, 'ONE', javascript.Order.ATOMIC);
+    var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
+    var value_three = generator.valueToCode(block, 'THREE', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    if (dropdown_type != "cmy"){
+        var code = `chroma(${value_one}, ${value_two}, ${value_three}, "${dropdown_type}")`;
+    }
+    else {
+        var code = `chroma(${value_one}, ${value_two}, ${value_three}, 0, "cmyk")`;
+    }
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_mix'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("mix colors with")
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"]]), "TYPE");
+      this.appendValueInput("ONE")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("color 1:");
+      this.appendValueInput("TWO")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("color 2:");
+      this.appendValueInput("RATIO")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("ratio:");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_mix'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_one = generator.valueToCode(block, 'ONE', javascript.Order.ATOMIC);
+    var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
+    var value_ratio = generator.valueToCode(block, 'RATIO', javascript.Order.ATOMIC);
+    var code = `chroma.mix(${value_one}, ${value_two}, ${value_ratio}, "${dropdown_type}")`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_average'] = {
+    init: function() {
+      this.appendValueInput("AVERAGE")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"]]), "TYPE")
+          .appendField("average of list");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_average'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_average = generator.valueToCode(block, 'AVERAGE', javascript.Order.ATOMIC);
+    var code = `chroma.average(${value_average}, "${dropdown_type}")`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_weightedaverage'] = {
+    init: function() {
+      this.appendValueInput("AVERAGE")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"]]), "TYPE")
+          .appendField("average of list");
+      this.appendValueInput("WEIGHT")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("with weight");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_weightedaverage'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_average = generator.valueToCode(block, 'AVERAGE', javascript.Order.ATOMIC);
+    var value_weight = generator.valueToCode(block, 'WEIGHT', javascript.Order.ATOMIC);
+    var code = `chroma.average(${value_average}, "${dropdown_type}", ${value_weight})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_random'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("random color");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_random'] = function(block, generator) {
+    var code = 'chroma.random()';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_color'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldColour("#ff0000"), "COLOR");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_color'] = function(block, generator) {
+    var colour_color = block.getFieldValue('COLOR');
+    var code = `chroma("${colour_color}")`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
