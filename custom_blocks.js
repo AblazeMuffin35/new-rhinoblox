@@ -2330,3 +2330,273 @@ javascript.javascriptGenerator.forBlock['chroma_color'] = function(block, genera
     var code = `chroma("${colour_color}")`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
+
+Blockly.Blocks['web_print'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("print this page");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#2E7D32");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['web_print'] = function(block, generator) {
+    var code = 'print()\n';
+    return code;
+};
+
+Blockly.Blocks['types_tobigint'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("convert");
+      this.appendDummyInput()
+          .appendField("to bigint");
+      this.setOutput(true, null);
+      this.setColour(90);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['types_tobigint'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var code = `BigInt(${value_input})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+/*
+Blockly.Blocks['chroma_scale'] = {
+    init: function() {
+      this.appendValueInput("COLORS")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("make scale of list");
+      this.appendValueInput("DOMAIN_MIN")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("with mode")
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"]]), "TYPE")
+          .appendField("and domain from");
+      this.appendValueInput("DOMAIN_MAX")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_scale'] = function(block, generator) {
+    var value_colors = generator.valueToCode(block, 'COLORS', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_domain_min = generator.valueToCode(block, 'DOMAIN_MIN', javascript.Order.ATOMIC);
+    var value_domain_max = generator.valueToCode(block, 'DOMAIN_MAX', javascript.Order.ATOMIC);
+    var code = `chroma.scale(${value_colors}).mode("${dropdown_type}").domain([${value_domain_min}, ${value_domain_max}])`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+*/
+Blockly.Blocks['chroma_getfromscale'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck("Number")
+          .appendField("get");
+      this.appendValueInput("SCALE")
+          .setCheck(null)
+          .appendField("from scale");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_getfromscale'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_scale = generator.valueToCode(block, 'SCALE', javascript.Order.ATOMIC);
+    var code = `${value_scale}(${value_input})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+/*
+Blockly.Blocks['chroma_scaledomainlist'] = {
+    init: function() {
+      this.appendValueInput("COLORS")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("make scale of list");
+      this.appendValueInput("DOMAIN")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("with mode")
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"]]), "TYPE")
+          .appendField("and domain list");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_scaledomainlist'] = function(block, generator) {
+    var value_colors = generator.valueToCode(block, 'COLORS', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_domain = generator.valueToCode(block, 'DOMAIN', javascript.Order.ATOMIC);
+    var code = `chroma.scale(${value_colors}).mode("${dropdown_type}").domain(${value_domain})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+*/
+Blockly.Blocks['chroma_scale'] = {
+    init: function() {
+      this.appendValueInput("COLORS")
+          .setCheck("Array")
+          .appendField("make scale of list");
+      this.appendDummyInput()
+          .appendField("with mode")
+          .appendField(new Blockly.FieldDropdown([["lrgb","lrgb"], ["rgb","rgb"], ["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"]]), "TYPE");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_scale'] = function(block, generator) {
+    var value_colors = generator.valueToCode(block, 'COLORS', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    var code = `chroma.scale(${value_colors}).mode("${dropdown_type}")`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_scalemodify'] = {
+    init: function() {
+      this.appendValueInput("SCALE")
+          .setCheck(null)
+          .appendField("set")
+          .appendField(new Blockly.FieldDropdown([["domain","domain"], ["gamma","gamma"], ["padding","padding"], ["classes","classes"]]), "NAME")
+          .appendField("of scale");
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_scalemodify'] = function(block, generator) {
+    var dropdown_name = block.getFieldValue('NAME');
+    var value_scale = generator.valueToCode(block, 'SCALE', javascript.Order.ATOMIC);
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var code = `${value_scale}.${dropdown_name}(${value_input})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_getlistfromscale'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck("Number")
+          .appendField("get list with");
+      this.appendValueInput("SCALE")
+          .setCheck(null)
+          .appendField("colors from scale");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_getlistfromscale'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_scale = generator.valueToCode(block, 'SCALE', javascript.Order.ATOMIC);
+    var code = `${value_scale}.colors(${value_input})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_convert'] = {
+    init: function() {
+      this.appendValueInput("COLOR")
+          .setCheck(null)
+          .appendField("convert color");
+      this.appendDummyInput()
+          .appendField("to")
+          .appendField(new Blockly.FieldDropdown([["hex","hex"], ["name","name"], ["rgb","rgb"], ["rgba","rgba"], ["hsl","hsl"], ["hsv","hsv"], ["hsi","hsi"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"], ["num","num"], ["gl","gl"]]), "TYPE");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_convert'] = function(block, generator) {
+    var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    var code = `chroma(${value_color}).${dropdown_type}()`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_contrast'] = {
+    init: function() {
+      this.appendValueInput("ONE")
+          .setCheck(null)
+          .appendField("contrast between");
+      this.appendValueInput("TWO")
+          .setCheck(null)
+          .appendField("and");
+      this.setInputsInline(true);
+      this.setOutput(true, "Number");
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_contrast'] = function(block, generator) {
+    var value_one = generator.valueToCode(block, 'ONE', javascript.Order.ATOMIC);
+    var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
+    var code = `chroma.contrast(${value_one}, ${value_two})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_distance'] = {
+    init: function() {
+      this.appendValueInput("ONE")
+          .setCheck(null)
+          .appendField("distance between");
+      this.appendValueInput("TWO")
+          .setCheck(null)
+          .appendField("and");
+      this.appendDummyInput()
+          .appendField("in")
+          .appendField(new Blockly.FieldDropdown([["hsl","hsl"], ["hsv","hsv"], ["lab","lab"], ["lch","lch"], ["hcl","hcl"], ["oklab","oklab"], ["oklch","oklch"], ["cmyk","cmyk"], ["rgb","rgb"], ["gl","gl"]]), "TYPE");
+      this.setInputsInline(true);
+      this.setOutput(true, "Number");
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_distance'] = function(block, generator) {
+    var value_one = generator.valueToCode(block, 'ONE', javascript.Order.ATOMIC);
+    var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
+    var dropdown_type = block.getFieldValue('TYPE');
+    var code = `chroma.distance(${value_one}, ${value_two}, "${dropdown_type}")`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['chroma_invertcolor'] = {
+    init: function() {
+      this.appendValueInput("COLOR")
+          .setCheck(null)
+          .appendField("invert color");
+      this.setOutput(true, null);
+      this.setColour("#9e4d45");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['chroma_invertcolor'] = function(block, generator) {
+    var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
+    var code = `chroma("#" + (Number("0x1"+(${value_color}).toUpperCase().substring(1)) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase())`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};

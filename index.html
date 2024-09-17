@@ -39,6 +39,7 @@
             <a style="cursor: pointer" onclick="loadExampleProject(examples[3])">Random Triangles</a>
             <a style="cursor: pointer" onclick="loadExampleProject(examples[4])">RhinoBlox Logo</a>
             <a style="cursor: pointer" onclick="loadExampleProject(examples[5])">Dragging</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[6])">Color Picker</a>
           </div>
         </div> 
       </div>
@@ -224,6 +225,7 @@
               </shadow>
             </value>
           </block>
+          <block type="web_print"></block>
         </category>
         <category name="Chroma" colour="#9e4d45">
           <block type="chroma_color"></block>
@@ -274,6 +276,60 @@
           </block>
           <block type="chroma_average"></block>
           <block type="chroma_weightedaverage"></block>
+          <block type="chroma_scale"></block>
+          <block type="chroma_scalemodify"></block>
+          <block type="chroma_getfromscale">
+            <value name="INPUT">
+              <shadow type="math_number">
+                <field name="NUM">0.5</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_getlistfromscale">
+            <value name="INPUT">
+              <shadow type="math_number">
+                <field name="NUM">5</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_contrast">
+            <value name="ONE">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
+              </shadow>
+            </value>
+            <value name="TWO">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#000000</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_distance">
+            <value name="ONE">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
+              </shadow>
+            </value>
+            <value name="TWO">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#000000</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_invertcolor">
+            <value name="COLOR">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="chroma_convert">
+            <value name="COLOR">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ff0000</field>
+              </shadow>
+            </value>
+          </block>
         </category>
         <category name="Logic" categorystyle="logic_category">
           <block type="controls_if"></block>
@@ -599,6 +655,7 @@
           <block type="types_toboolean"></block>
           <block type="types_dataurl"></block>
           <block type="types_date"></block>
+          <block type="types_tobigint"></block>
           <block type="types_convertbase">
             <value name="INPUT">
               <shadow type="math_number">

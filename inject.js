@@ -67,6 +67,8 @@ require(["vs/editor/editor.main"], () => {
     readOnly: true
   });
 });
+
+//Reload code editors
 setTimeout(function(){changeEditor()},500);
 setTimeout(function(){changeEditor()}, 600);
 
@@ -101,6 +103,9 @@ function runCodeWithConsole() {
                     break;
                 case "boolean":
                     $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #398cd6'>" + result + "</span><br>"); console.push(result);
+                    break;
+                case "function":
+                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #ffde71'>" + result + "</span><br>"); console.push(result);
                     break;
                 default:
                     if (result == undefined || result == null) {
