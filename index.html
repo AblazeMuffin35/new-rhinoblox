@@ -15,14 +15,39 @@
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.js" integrity="sha512-ZHzbWDQKpcZxIT9l5KhcnwQTidZFzwK/c7gpUUsFvGjEsxPusdUCyFxjjpc7e/Wj7vLhfMujNx7COwOmzbn+2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.css" integrity="sha512-kT0v1BxcibEO2Yc+6Z3W1gNsN+2cZ/U6uITqHhIJl8SAvt9vpO8llugdCPXA7cCnp8G1xbuSqHNMRaR3Zlz9yA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@13.1.1/lib/browser/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.4.2/chroma.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/autocorrect@1.2.0/index.js"></script>
 </head>
-<body>
+<body>  
+    <div id="creditsModal" class="credits-modal">
+      <div class="credits-modal-content">
+        <span class="credits-modal-close">&times;</span>
+        <h2>Credits</h2>
+        <br>
+        <h3 style="color: skyblue">RhinoBlox Owner</h3>
+        <p>AblazeMuffin35</p>
+        <br>
+        <h3 style="color: skyblue">Rhinus Developers</h3>
+        <p>ItalianYeney1<span class="credits-modal-separator">, </span>Tech72Wizard<span class="credits-modal-separator">, </span>Page</p>
+        <br>
+        <h3 style="color: skyblue">Special Thanks</h3>
+        <p>
+          <a class="credits-modal-link" target="_blank" href="https://developers.google.com/blockly">Blockly</a>
+          <span class="credits-modal-separator">, </span>
+          <a class="credits-modal-link" target="_blank" href="https://microsoft.github.io/monaco-editor">Monaco Editor</a>
+          <span class="credits-modal-separator">, </span>
+          <a class="credits-modal-link" target="_blank" href="https://gka.github.io/chroma.js">Chroma.js</a>
+          <span class="credits-modal-separator">, </span>
+          <a class="credits-modal-link" target="_blank" href="https://mathjs.org/">Math.js</a>
+        </p>
+      </div>
+    </div>
+
     <div class="topnav">
-        <a class="active" href="" onclick="location.reload()">RhinoBlox</a>
+        <a class="active" href="">RhinoBlox</a>
         <a id="editorChanger" style="float: left; cursor: pointer" onclick="changeEditor()">JavaScript</a>
         <a style="cursor: pointer">
           <input type="file" accept=".rbp, .json" id="actual-btn" hidden/><label style="cursor: pointer" for="actual-btn">Load</label>
@@ -41,9 +66,9 @@
             <a style="cursor: pointer" onclick="loadExampleProject(examples[5])">Dragging</a>
             <a style="cursor: pointer" onclick="loadExampleProject(examples[6])">Color Picker</a>
           </div>
-        </div> 
+        </div>
       </div>
-    
+
       <section id="blocklyContainer">
         <div id="blocklyDiv"></div>
         <div style="height: 650px;" id="monacoEditor"></div>
@@ -331,17 +356,6 @@
             </value>
           </block>
         </category>
-        <category name="Logic" categorystyle="logic_category">
-          <block type="controls_if"></block>
-          <block type="logic_compare"></block>
-          <block type="logic_operation"></block>
-          <block type="logic_negate"></block>
-          <block type="logic_boolean"></block>
-          <block type="logic_ternary"></block>
-          <block type="logic_null_test"></block>
-          <block type="logic_null"></block>
-          <block type="logic_undefined"></block>
-        </category>
         <category name="Loops" categorystyle="loop_category">
           <block type="controls_repeat_ext">
             <value name="TIMES">
@@ -386,6 +400,17 @@
             </value>
           </block>
           <block type="loops_stop_timeout"></block>
+        </category>
+        <category name="Logic" categorystyle="logic_category">
+          <block type="controls_if"></block>
+          <block type="logic_compare"></block>
+          <block type="logic_operation"></block>
+          <block type="logic_negate"></block>
+          <block type="logic_boolean"></block>
+          <block type="logic_ternary"></block>
+          <block type="logic_null_test"></block>
+          <block type="logic_null"></block>
+          <block type="logic_undefined"></block>
         </category>
         <category name="Math" categorystyle="math_category">
           <block type="math_number" gap="32">
@@ -506,6 +531,23 @@
               </shadow>
             </value>
           </block>
+          <label text=" "></label>
+          <block type="math_createparser"></block>
+          <block type="math_parsereval">
+            <value name="MATH">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="math_roundparsereval">
+            <value name="MATH">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="math_clearparser"></block>
         </category>
         <category name="Text" categorystyle="text_category">
           <block type="text"></block>
@@ -772,7 +814,39 @@
             </value>
           </block>
         </category> -->
-        <category name="Canvas Input" colour="190">
+        <category name="Canvas Data" colour="190">
+          <block type="canvas_image"></block>
+          <block type="canvas_width"></block>
+          <block type="canvas_height"></block>
+          <block type="canvas_resize">
+            <value name="WIDTH">
+              <shadow type="math_number">
+                <field name="NUM">500</field>
+              </shadow>
+            </value>
+            <value name="HEIGHT">
+              <shadow type="math_number">
+                <field name="NUM">500</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getbg"></block>
+          <block type="canvas_changebg">
+            <value name="COLOR">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ffffff</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getfilter"></block>
+          <block type="canvas_setfilter">
+            <value name="VALUE">
+              <shadow type="text">
+                <field name="TEXT">5px</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_clearfilter"></block>
           <block type="canvas_getmousex"></block>
           <block type="canvas_getmousey"></block>
           <block type="canvas_mousedown"></block>
@@ -834,24 +908,6 @@
           </block>
         </category>
         <category name="Canvas" colour="60">
-          <block type="canvas_image"></block>
-          <block type="canvas_getbg"></block>
-          <block type="canvas_changebg">
-            <value name="COLOR">
-              <shadow type="colour_picker">
-                <field name="COLOUR">#ffffff</field>
-              </shadow>
-            </value>
-          </block>
-          <block type="canvas_getfilter"></block>
-          <block type="canvas_setfilter">
-            <value name="VALUE">
-              <shadow type="text">
-                <field name="TEXT">5px</field>
-              </shadow>
-            </value>
-          </block>
-          <block type="canvas_clearfilter"></block>
           <block type="canvas_clear"></block>
           <block type="canvas_draw_fillrect">
             <value name="COLOR">
@@ -1026,6 +1082,28 @@
               </shadow>
             </value>
           </block>
+          <block type="canvas_drawcurve">
+            <value name="CPX">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="CPY">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="X">
+              <shadow type="math_number">
+                <field name="NUM">100</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number">
+                <field name="NUM">100</field>
+              </shadow>
+            </value>
+          </block>
           <block type="canvas_filltext">
             <value name="COLOR">
               <shadow type="colour_picker">
@@ -1148,19 +1226,15 @@
         <category name="Functions" categorystyle="procedure_category"
         custom="PROCEDURE"></category>
       </xml>
-    
+
+      <div class="footer">
+        <a style="float: left; padding: 0px 15px" id="creditsModalBtn" class="credits-link">Credits</a><a href="https://discord.gg/YwdvExN82q" target="_blank" style="float: right; padding: 0px 15px" class="credits-link">Discord</a>
+      </div>
+
       <!-- Initialize Blockly -->
       <script src="field_pitch.js"></script>
       <script src="custom_blocks.js"></script>
       <script src="examples.js"></script>
       <script src="inject.js"></script>
-    
-      <div class="footer">
-        <a class="blockly-link" href="https://developers.google.com/blockly" target="_blank">Blockly</a>
-        <b>|</b>
-        <a class="blockly-link" href="https://ablazemuffin35.vercel.app" target="_blank">AblazeMuffin35</a>
-        <b>|</b>
-        <a class="blockly-link" href="https://microsoft.github.io/monaco-editor/" target="_blank">Monaco Editor</a>
-      </div>
     </body>
 </html>

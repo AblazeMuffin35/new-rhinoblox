@@ -1420,7 +1420,7 @@ Blockly.Blocks['canvas_changebg'] = {
           .appendField("change background color to");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -1436,7 +1436,7 @@ Blockly.Blocks['canvas_getbg'] = {
       this.appendDummyInput()
           .appendField("background color");
       this.setOutput(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -1529,7 +1529,7 @@ Blockly.Blocks['canvas_image'] = {
           .appendField("canvas as data URL");
       this.setInputsInline(true);
       this.setOutput(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -1843,7 +1843,7 @@ Blockly.Blocks['canvas_setfilter'] = {
           .appendField("to");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -1862,7 +1862,7 @@ Blockly.Blocks['canvas_clearfilter'] = {
           .appendField("clear filter");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -1876,9 +1876,9 @@ javascript.javascriptGenerator.forBlock['canvas_clearfilter'] = function(block, 
 Blockly.Blocks['canvas_getfilter'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("get current filter");
+          .appendField("current filter");
       this.setOutput(true, null);
-      this.setColour(60);
+      this.setColour(190);
    this.setTooltip("");
    this.setHelpUrl("");
     }
@@ -2599,4 +2599,173 @@ javascript.javascriptGenerator.forBlock['chroma_invertcolor'] = function(block, 
     var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
     var code = `chroma("#" + (Number("0x1"+(${value_color}).toUpperCase().substring(1)) ^ 0xFFFFFF).toString(16).substr(1).toUpperCase())`;
     return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_resize'] = {
+    init: function() {
+      this.appendValueInput("WIDTH")
+          .setCheck("Number")
+          .appendField("set canvas size to width:");
+      this.appendValueInput("HEIGHT")
+          .setCheck("Number")
+          .appendField("height:");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+
+javascript.javascriptGenerator.forBlock['canvas_resize'] = function(block, generator) {
+    var value_width = generator.valueToCode(block, 'WIDTH', javascript.Order.ATOMIC);
+    var value_height = generator.valueToCode(block, 'HEIGHT', javascript.Order.ATOMIC);
+    var code = `canvas.width = ${value_width}; canvas.height = ${value_height};\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_width'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("canvas width");
+      this.setOutput(true, "Number");
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_width'] = function(block, generator) {
+    var code = 'canvas.width';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_height'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("canvas height");
+      this.setOutput(true, "Number");
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_height'] = function(block, generator) {
+    var code = 'canvas.height';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['math_createparser'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("create parser")
+          .appendField(new Blockly.FieldTextInput("parser"), "PARSER");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['math_createparser'] = function(block, generator) {
+    var text_parser = block.getFieldValue('PARSER');
+    var code = `const ${text_parser} = math.parser();\n`;
+    return code;
+};
+
+Blockly.Blocks['math_parsereval'] = {
+    init: function() {
+      this.appendValueInput("MATH")
+          .setCheck(null)
+          .appendField("evaluate");
+      this.appendDummyInput()
+          .appendField("with")
+          .appendField(new Blockly.FieldTextInput("parser"), "PARSER");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['math_parsereval'] = function(block, generator) {
+    var value_math = generator.valueToCode(block, 'MATH', javascript.Order.ATOMIC);
+    var text_parser = block.getFieldValue('PARSER');
+    var code = `${text_parser}.evaluate(${value_math});\n`;
+    return code;
+};
+
+Blockly.Blocks['math_roundparsereval'] = {
+    init: function() {
+      this.appendValueInput("MATH")
+          .setCheck(null)
+          .appendField("evaluate");
+      this.appendDummyInput()
+          .appendField("with")
+          .appendField(new Blockly.FieldTextInput("parser"), "PARSER");
+      this.setOutput(true, null);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['math_roundparsereval'] = function(block, generator) {
+    var value_math = generator.valueToCode(block, 'MATH', javascript.Order.ATOMIC);
+    var text_parser = block.getFieldValue('PARSER');
+    var code = `${text_parser}.evaluate(${value_math})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['math_clearparser'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("clear parser")
+          .appendField(new Blockly.FieldTextInput("parser"), "PARSER");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+  javascript.javascriptGenerator.forBlock['math_clearparser'] = function(block, generator) {
+    var text_parser = block.getFieldValue('PARSER');
+    var code = `${text_parser}.clear();\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_drawcurve'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("draw quadratic curve with");
+      this.appendValueInput("CPX")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("control x:");
+      this.appendValueInput("CPY")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("control y:");
+      this.appendValueInput("X")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("end x:");
+      this.appendValueInput("Y")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("end y:");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(60);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_drawcurve'] = function(block, generator) {
+    var value_cpx = generator.valueToCode(block, 'CPX', javascript.Order.ATOMIC);
+    var value_cpy = generator.valueToCode(block, 'CPY', javascript.Order.ATOMIC);
+    var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+    var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+    var code = `context.quadraticCurveTo(${value_cpx}, ${value_cpy}, ${value_x}, ${value_y});\n`;
+    return code;
 };

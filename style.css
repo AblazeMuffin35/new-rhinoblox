@@ -52,20 +52,21 @@ body
    bottom: 0;
    width: 100%;
    background-color: #2c2a36;
-   color: #6c6a76;
+   color: white;
    text-align: center;
    padding-bottom: 15px;
    padding-top: 15px;
 }
 
-.blockly-link {
+.credits-link {
     text-decoration: none;
-    color: #6c6a76;
+    color: white;
     transition: all 0.15s;
+    cursor: pointer;
 }
 
-.blockly-link:hover {
-    color: white;
+.credits-link:hover {
+    color: #a6a5ab;
 }
 
 #blocklyContainer {
@@ -84,7 +85,7 @@ body
 }
 
 #consoleContainer {
-    height: 623px;
+    height: 84.5vh;
     user-select: none;
 }
 
@@ -181,4 +182,61 @@ body
   
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.credits-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5);
+    user-select: none;
+}
+  
+/* Modal Content */
+.credits-modal-content {
+    background-color: #4c4a56;
+    margin: auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+/* The Close Button */
+.credits-modal-close {
+    color: white;
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    transform: translateY(-7px);
+    transition: all 0.15s;
+}
+  
+.credits-modal-close:hover,
+.credits-modal-close:focus {
+    opacity: 50%;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.credits-modal-link {
+    text-decoration: none;
+    color: white;
+    transition: all 0.15s;
+}
+
+.credits-modal-link:hover {
+    color: #a6a5ab;
+}
+
+.credits-modal-separator {
+    color: #a6a5ab;
 }

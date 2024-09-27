@@ -69,8 +69,8 @@ require(["vs/editor/editor.main"], () => {
 });
 
 //Reload code editors
-setTimeout(function(){changeEditor()},500);
-setTimeout(function(){changeEditor()}, 600);
+setTimeout(function(){changeEditor()}, 300);
+setTimeout(function(){changeEditor()}, 400);
 
 //Inform user about security threats
 console.clear();
@@ -78,7 +78,23 @@ console.log("%cStop!", "color: red; font-size: 30px; font-weight: bold");
 console.log("Don't paste any code here you don't understand, as it might be an attempt to hack your accounts.\nIf you know what you're doing, this console can be used for debugging and testing code.");
 
 //Make <body> visible
-setTimeout(function(){jQuery('body').css('opacity', '1');},1000);
+setTimeout(function(){jQuery('body').css('opacity', '1');},500);
+
+var modal = document.getElementById("creditsModal");
+var btn = document.getElementById("creditsModalBtn");
+var span = document.getElementsByClassName("credits-modal-close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+span.onclick = function() {
+  modal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 
 //Special Functions
 window.onbeforeunload = function()
