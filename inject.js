@@ -101,9 +101,21 @@ window.onbeforeunload = function()
 {
     return "...";
 }
+
+function resetAllSettings() {
+    clearConsole();
+    clearCanvas();
+    forceDeleteTimers();
+    clearCanvasFilter();
+    setCanvasCursor('auto');
+    canvas.width = 500;
+    canvas.height = 500;
+}
+
 function getCode() {
     return Blockly.JavaScript.workspaceToCode(workspace);
 }
+
 function runCodeWithConsole() {
     try {
         var result = eval(getCode());
