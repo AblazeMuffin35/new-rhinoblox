@@ -18,10 +18,12 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjs@13.1.1/lib/browser/math.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chroma-js@2.4.2/chroma.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/autocorrect@1.2.0/index.js"></script>
+    <script src="Controller.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>  
+<body> 
+    <div hidden id="controllerCurrentButtonDiv">noButtonCurrentlyPressed</div>
     <div id="creditsModal" class="credits-modal">
       <div class="credits-modal-content">
         <span class="credits-modal-close">&times;</span>
@@ -41,7 +43,9 @@
           <span class="credits-modal-separator">, </span>
           <a class="credits-modal-link" target="_blank" href="https://gka.github.io/chroma.js">Chroma.js</a>
           <span class="credits-modal-separator">, </span>
-          <a class="credits-modal-link" target="_blank" href="https://mathjs.org/">Math.js</a>
+          <a class="credits-modal-link" target="_blank" href="https://mathjs.org">Math.js</a>
+          <span class="credits-modal-separator">, </span>
+          <a class="credits-modal-link" target="_blank" href="https://samiare.github.io/Controller.js">Controller.js</a>
         </p>
       </div>
     </div>
@@ -356,6 +360,34 @@
             </value>
           </block>
         </category>
+        <category name="Controller" colour="#1f618d">
+          <block type="controller_connected"></block>
+          <block type="controller_name"></block>
+          <label text=" "></label>
+          <block type="controller_button"></block>
+          <block type="controller_analog"></block>
+          <block type="controller_trigger"></block>
+          <label text=" "></label>
+          <block type="controller_vibrate">
+            <value name="DURATION">
+              <shadow type="math_number">
+                <field name="NUM">1000</field>
+              </shadow>
+            </value>
+            <value name="WEAK">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+            <value name="STRONG">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="controller_watch"></block>
+          <block type="controller_unwatch"></block>
+        </category>
         <category name="Loops" categorystyle="loop_category">
           <block type="controls_repeat_ext">
             <value name="TIMES">
@@ -423,6 +455,18 @@
               </shadow>
             </value>
             <value name="B">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="math_bitwise">
+            <value name="ONE">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+            <value name="TWO">
               <shadow type="math_number">
                 <field name="NUM">1</field>
               </shadow>
@@ -847,9 +891,11 @@
             </value>
           </block>
           <block type="canvas_clearfilter"></block>
+          <label text=" "></label>
           <block type="canvas_getmousex"></block>
           <block type="canvas_getmousey"></block>
           <block type="canvas_mousedown"></block>
+          <block type="canvas_mousedowntime"></block>
           <block type="canvas_area_hover">
             <value name="X1">
               <shadow type="math_number">
@@ -896,7 +942,7 @@
           </block>
           <block type="canvas_checkkeydown"></block>
           <block type="canvas_lastkey"></block>
-          <block type="canvas_mousedowntime"></block>
+          <label text=" "></label>
           <block type="canvas_getcursor"></block>
           <block type="canvas_setcursor"></block>
           <block type="canvas_setcursorurl">

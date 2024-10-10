@@ -110,6 +110,7 @@ function resetAllSettings() {
     setCanvasCursor('auto');
     canvas.width = 500;
     canvas.height = 500;
+    Controller.search();
 }
 
 function getCode() {
@@ -505,4 +506,45 @@ function setCanvasCursor(cursor) {
 
 function getCanvasCursor() {
     return document.getElementById("canvasContainer").style.cursor;
+}
+
+var currentControllerButtons = ['noButtonCurrentlyPressed', 'noButtonCurrentlyPressed', 'noButtonCurrentlyPressed', 'noButtonCurrentlyPressed'];
+
+window.addEventListener('gc.button.press', detectControllerButtonPress, false);
+window.addEventListener('gc.button.release', detectControllerButtonRelease, false);
+
+function detectControllerButtonPress(event) {
+    currentControllerButtons[event.detail.controllerIndex] = event.detail.name;
+}
+function detectControllerButtonRelease(event) {
+    currentControllerButtons[event.detail.controllerIndex] = 'noButtonCurrentlyPressed';
+}
+
+var currentControllerLeftAnalogSticks = [{}, {}, {}, {}];
+var currentControllerRightAnalogSticks = [{}, {}, {}, {}];
+
+window.addEventListener('gc.analog.change', detectAnalogStickChange, false);
+
+function detectAnalogStickChange(event) {
+    if (event.detail.name == "LEFT_ANALOG_STICK") {
+        currentControllerLeftAnalogSticks[event.detail.controllerIndex] = event.detail.position;
+    }
+    else if (event.detail.name == "RIGHT_ANALOG_STICK") {
+        currentControllerRightAnalogSticks[event.detail.controllerIndex] = event.detail.position;
+    }
+}
+
+var currentControllerLeftTriggers = [0, 0, 0, 0];
+var currentControllerRightTriggers = [0, 0, 0, 0];
+
+window.addEventListener('gc.button.hold', detectTriggerChange, false);
+window.addEventListener('gc.button.release', detectTriggerChange, false);
+
+function detectTriggerChange(event) {
+    if (event.detail.name == "LEFT_SHOULDER_BOTTOM") {
+        currentControllerLeftTriggers[event.detail.controllerIndex] = event.detail.value;
+    }
+    else if (event.detail.name == "RIGHT_SHOULDER_BOTTOM") {
+        currentControllerRightTriggers[event.detail.controllerIndex] = event.detail.value;
+    }
 }

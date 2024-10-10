@@ -2769,3 +2769,193 @@ javascript.javascriptGenerator.forBlock['canvas_drawcurve'] = function(block, ge
     var code = `context.quadraticCurveTo(${value_cpx}, ${value_cpy}, ${value_x}, ${value_y});\n`;
     return code;
 };
+
+Blockly.Blocks['controller_connected'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("is controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX")
+          .appendField("connected?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_connected'] = function(block, generator) {
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `(Controller.getController(${dropdown_index}) != undefined)`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['controller_name'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("name of controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX");
+      this.setOutput(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_name'] = function(block, generator) {
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `Controller.getController(${dropdown_index}).name`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['controller_button'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("button")
+          .appendField(new Blockly.FieldDropdown([["face 1","FACE_1"], ["face 2","FACE_2"], ["face 3","FACE_3"], ["face 4","FACE_4"], ["left shoulder","LEFT_SHOULDER"], ["right shoulder","RIGHT_SHOULDER"], ["left shoulder bottom","LEFT_SHOULDER_BOTTOM"], ["right shoulder bottom","RIGHT_SHOULDER_BOTTOM"], ["select","SELECT"], ["start","START"], ["left analog button","LEFT_ANALOG_BUTTON"], ["right analog button","RIGHT_ANALOG_BUTTON"], ["dpad up","DPAD_UP"], ["dpad down","DPAD_DOWN"], ["dpad left","DPAD_LEFT"], ["dpad right","DPAD_RIGHT"], ["home","HOME"]]), "TYPE")
+          .appendField("pressed on controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX")
+          .appendField("?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_button'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `(currentControllerButtons[${dropdown_index}] == '${dropdown_type}')`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['controller_analog'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldDropdown([["x","x"], ["y","y"]]), "POSITION")
+          .appendField("position of")
+          .appendField(new Blockly.FieldDropdown([["left","Left"], ["right","Right"]]), "TYPE")
+          .appendField("analog stick on controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX");
+      this.setOutput(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_analog'] = function(block, generator) {
+    var dropdown_position = block.getFieldValue('POSITION');
+    var dropdown_type = block.getFieldValue('TYPE');
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `currentController${dropdown_type}AnalogSticks[${dropdown_index}].${dropdown_position}`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['controller_trigger'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("force value of ")
+          .appendField(new Blockly.FieldDropdown([["left","Left"], ["right","Right"]]), "TYPE")
+          .appendField("trigger on controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX");
+      this.setOutput(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_trigger'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `currentController${dropdown_type}Triggers[${dropdown_index}]`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['controller_vibrate'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("vibrate controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX")
+          .appendField("with");
+      this.appendValueInput("DURATION")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("duration:");
+      this.appendValueInput("WEAK")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("weak magnitude:");
+      this.appendValueInput("STRONG")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("strong magnitude:");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_vibrate'] = function(block, generator) {
+    var dropdown_index = block.getFieldValue('INDEX');
+    var value_duration = generator.valueToCode(block, 'DURATION', javascript.Order.ATOMIC);
+    var value_weak = generator.valueToCode(block, 'WEAK', javascript.Order.ATOMIC);
+    var value_strong = generator.valueToCode(block, 'STRONG', javascript.Order.ATOMIC);
+    var code = `navigator.getGamepads()[${dropdown_index}].vibrationActuator.playEffect("dual-rumble", {startDelay: 0, duration: ${value_duration}, weakMagnitude: ${value_weak}, strongMagnitude: ${value_strong}});\n`;
+    return code;
+};
+
+Blockly.Blocks['controller_watch'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("enable controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_watch'] = function(block, generator) {
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `Controller.getController(${dropdown_index}).watch();\n`;
+    return code;
+};
+
+Blockly.Blocks['controller_unwatch'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("disable controller")
+          .appendField(new Blockly.FieldDropdown([["A","0"], ["B","1"], ["C","2"], ["D","3"]]), "INDEX");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#1f618d");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['controller_unwatch'] = function(block, generator) {
+    var dropdown_index = block.getFieldValue('INDEX');
+    var code = `Controller.getController(${dropdown_index}).unwatch();\n`;
+    return code;
+};
+
+Blockly.Blocks['math_bitwise'] = {
+    init: function() {
+      this.appendValueInput("ONE")
+          .setCheck("Number");
+      this.appendValueInput("TWO")
+          .setCheck("Number")
+          .appendField(new Blockly.FieldDropdown([["&","&"], ["|","|"], ["^","^"], ["<<","<<"], [">>",">>"], [">>>",">>>"]]), "OPERATION");
+      this.setInputsInline(true);
+      this.setOutput(true, "Number");
+      this.setColour(230);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['math_bitwise'] = function(block, generator) {
+    var value_one = generator.valueToCode(block, 'ONE', javascript.Order.ATOMIC);
+    var dropdown_operation = block.getFieldValue('OPERATION');
+    var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
+    var code = `${value_one} ${dropdown_operation} ${value_two}`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
