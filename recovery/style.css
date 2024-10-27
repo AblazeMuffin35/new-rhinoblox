@@ -1,0 +1,66 @@
+body
+{
+    opacity: 1;
+}
+
+.centered-content {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    padding-top: 30px;
+    line-height: 75%;
+}
+
+.centered-content h1 {
+    font-size: 35px;
+    font-weight: lighter;
+    line-height: 200%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    table-layout: fixed;
+}
+  
+td, th {
+    border: 2px solid #4c4a56;
+    text-align: left;
+    padding:  12px;
+}
+
+#download-button {
+    padding: 15px 30px;
+    color: white;
+    background-color: #1976d2;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-right: 5px;
+}
+
+#download-button:hover {
+    background-color: #1e88e5;
+    transform: scale(1.02);
+}
+
+#delete-button {
+    padding: 15px 30px;
+    color: white;
+    background-color: #d32f2f;
+    border: none;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+#delete-button:hover {
+    background-color: #e53935;
+    transform: scale(1.02);
+}

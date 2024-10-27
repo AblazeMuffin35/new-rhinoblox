@@ -140,7 +140,7 @@ javascript.javascriptGenerator.forBlock['web_language'] = function(block, genera
 Blockly.Blocks['web_online'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("online");
+          .appendField("online?");
       this.setOutput(true, "Boolean");
       this.setColour("#2E7D32");
    this.setTooltip("");
@@ -2957,5 +2957,656 @@ javascript.javascriptGenerator.forBlock['math_bitwise'] = function(block, genera
     var dropdown_operation = block.getFieldValue('OPERATION');
     var value_two = generator.valueToCode(block, 'TWO', javascript.Order.ATOMIC);
     var code = `${value_one} ${dropdown_operation} ${value_two}`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['web_getfromtimestamp'] = {
+    init: function() {
+      this.appendValueInput("TIMESTAMP")
+          .setCheck(null)
+          .appendField("get")
+          .appendField(new Blockly.FieldDropdown([["milliseconds","getMilliseconds"], ["seconds","getSeconds"], ["minutes","getMinutes"], ["hours","getHours"], ["day","getDay"], ["date","getDate"], ["month","getMonth"], ["year","getFullYear"], ["unix time","getTime"], ["timezone offset","getTimezoneOffset"], ["string","toString"], ["locale string","toLocaleString"], ["date string","toDateString"], ["time string","toTimeString"], ["locale date string","toLocaleDateString"], ["locale time string","toLocaleTimeString"]]), "DATA")
+          .appendField("from timestamp");
+      this.setOutput(true, null);
+      this.setColour("#2E7D32");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['web_getfromtimestamp'] = function(block, generator) {
+    var dropdown_data = block.getFieldValue('DATA');
+    var value_timestamp = generator.valueToCode(block, 'TIMESTAMP', javascript.Order.ATOMIC);
+    var code = `${value_timestamp}.${dropdown_data}()`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['web_modifytimestamp'] = {
+    init: function() {
+      this.appendValueInput("VALUE")
+          .setCheck("Number")
+          .appendField("set")
+          .appendField(new Blockly.FieldDropdown([["milliseconds","setMilliseconds"], ["seconds","setSeconds"], ["minutes","setMinutes"], ["hours","setHours"], ["day","setDay"], ["date","setDate"], ["month","setMonth"], ["year","setFullYear"], ["unix time","setTime"]]), "DATA")
+          .appendField("to");
+      this.appendValueInput("TIMESTAMP")
+          .setCheck(null)
+          .appendField("in timestamp");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#2E7D32");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['web_modifytimestamp'] = function(block, generator) {
+    var dropdown_data = block.getFieldValue('DATA');
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var value_timestamp = generator.valueToCode(block, 'TIMESTAMP', javascript.Order.ATOMIC);
+    var code = `${value_timestamp}.${dropdown_data}(${value_value})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['types_instanceof'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("is");
+      this.appendDummyInput()
+          .appendField("an instance of")
+          .appendField(new Blockly.FieldTextInput(""), "TYPE")
+          .appendField("?");
+      this.setInputsInline(true);
+      this.setOutput(true, "Boolean");
+      this.setColour(90);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['types_instanceof'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var text_type = block.getFieldValue('TYPE');
+    var code = value_input + ' instanceof ' + text_type;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_date'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck("String")
+          .appendField("date");
+      this.appendValueInput("FORMAT")
+          .setCheck("String")
+          .appendField("with format");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_date'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_format = generator.valueToCode(block, 'FORMAT', javascript.Order.ATOMIC);
+    var code = `dayjs(${value_input}, ${value_format})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_currentdate'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("current date");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_currentdate'] = function(block, generator) {
+    var code = 'dayjs()';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_valid'] = {
+    init: function() {
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField("is");
+      this.appendDummyInput()
+          .appendField("a valid date?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_valid'] = function(block, generator) {
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var code = `${value_date}.isValid()`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_get'] = {
+    init: function() {
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField("get")
+          .appendField(new Blockly.FieldDropdown([["millisecond","millisecond"], ["second","second"], ["minute","minute"], ["hour","hour"], ["day","day"], ["date","date"], ["month","month"], ["year","year"]]), "UNIT")
+          .appendField("from date");
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_get'] = function(block, generator) {
+    var dropdown_unit = block.getFieldValue('UNIT');
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var code = `${value_date}.get('${dropdown_unit}')`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_set'] = {
+    init: function() {
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField("set")
+          .appendField(new Blockly.FieldDropdown([["millisecond","millisecond"], ["second","second"], ["minute","minute"], ["hour","hour"], ["day","day"], ["date","date"], ["month","month"], ["year","year"]]), "UNIT")
+          .appendField("in date");
+      this.appendValueInput("VALUE")
+          .setCheck("Number")
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_set'] = function(block, generator) {
+    var dropdown_unit = block.getFieldValue('UNIT');
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var code = `${value_date}.set('${dropdown_unit}', ${value_value})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_add'] = {
+    init: function() {
+      this.appendValueInput("VALUE")
+          .setCheck("Number")
+          .appendField("add");
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField(new Blockly.FieldDropdown([["millisecond","millisecond"], ["second","second"], ["minute","minute"], ["hour","hour"], ["day","day"], ["date","date"], ["month","month"], ["year","year"]]), "UNIT")
+          .appendField("to date");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_add'] = function(block, generator) {
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var dropdown_unit = block.getFieldValue('UNIT');
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var code = `${value_date}.add(${value_value}, '${dropdown_unit}')`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_subtract'] = {
+    init: function() {
+      this.appendValueInput("VALUE")
+          .setCheck("Number")
+          .appendField("subtract");
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField(new Blockly.FieldDropdown([["millisecond","millisecond"], ["second","second"], ["minute","minute"], ["hour","hour"], ["day","day"], ["date","date"], ["month","month"], ["year","year"]]), "UNIT")
+          .appendField("from date");
+      this.setInputsInline(true);
+      this.setOutput(true, null);
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_subtract'] = function(block, generator) {
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var dropdown_unit = block.getFieldValue('UNIT');
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var code = `${value_date}.subtract(${value_value}, '${dropdown_unit}')`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_format'] = {
+    init: function() {
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField("display date");
+      this.appendValueInput("FORMAT")
+          .setCheck("String")
+          .appendField("with format");
+      this.setInputsInline(true);
+      this.setOutput(true, "String");
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_format'] = function(block, generator) {
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var value_format = generator.valueToCode(block, 'FORMAT', javascript.Order.ATOMIC);
+    var code = `${value_date}.format(${value_format})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_fromnow'] = {
+    init: function() {
+      this.appendValueInput("DATE")
+          .setCheck(null)
+          .appendField("display date");
+      this.appendDummyInput()
+          .appendField("from/to now");
+      this.setInputsInline(true);
+      this.setOutput(true, "String");
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_fromnow'] = function(block, generator) {
+    var value_date = generator.valueToCode(block, 'DATE', javascript.Order.ATOMIC);
+    var code = `${value_date}.fromNow()`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_beforeafter'] = {
+    init: function() {
+      this.appendValueInput("DATE1")
+          .setCheck(null)
+          .appendField("is date");
+      this.appendValueInput("DATE2")
+          .setCheck(null)
+          .appendField(new Blockly.FieldDropdown([["before","isBefore"], ["after","isAfter"], ["same as","isSame"], ["same or before","isSameOrBefore"], ["same or after","isSameOrAfter"]]), "NAME")
+          .appendField("date");
+      this.appendDummyInput()
+          .appendField("?");
+      this.setInputsInline(true);
+      this.setOutput(true, "Boolean");
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_beforeafter'] = function(block, generator) {
+    var value_date1 = generator.valueToCode(block, 'DATE1', javascript.Order.ATOMIC);
+    var dropdown_name = block.getFieldValue('NAME');
+    var value_date2 = generator.valueToCode(block, 'DATE2', javascript.Order.ATOMIC);
+    var code = `${value_date1}.${dropdown_name}(${value_date2})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['dates_between'] = {
+    init: function() {
+      this.appendValueInput("DATE1")
+          .setCheck(null)
+          .appendField("is date");
+      this.appendValueInput("DATE2")
+          .setCheck(null)
+          .appendField("between date");
+      this.appendValueInput("DATE3")
+          .setCheck(null)
+          .appendField("and date");
+      this.appendDummyInput()
+          .appendField("?");
+      this.setInputsInline(true);
+      this.setOutput(true, "Boolean");
+      this.setColour("#d17896");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['dates_between'] = function(block, generator) {
+    var value_date1 = generator.valueToCode(block, 'DATE1', javascript.Order.ATOMIC);
+    var value_date2 = generator.valueToCode(block, 'DATE2', javascript.Order.ATOMIC);
+    var value_date3 = generator.valueToCode(block, 'DATE3', javascript.Order.ATOMIC);
+    var code = `${value_date1}.isBetween(${value_date2}, ${value_date3})`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['console_debugger'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("data:image/png;base64,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", 30, 30, { alt: "", flipRtl: "FALSE" }))
+          .appendField("is debugger on?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#72503e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['console_debugger'] = function(block, generator) {
+    var code = 'debugger_on';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['advanced_pressbutton'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("press the")
+          .appendField(new Blockly.FieldDropdown([["start","0"], ["stop","1"], ["debugger","2"], ["display","3"]]), "NAME")
+          .appendField("button");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#555555");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['advanced_pressbutton'] = function(block, generator) {
+    var dropdown_name = block.getFieldValue('NAME');
+    var code = `document.getElementsByClassName('controlButton')[${dropdown_name}].click();\n`;
+    return code;
+};
+
+Blockly.Blocks['web_freeze'] = {
+    init: function() {
+      this.appendValueInput("DELAY")
+          .setCheck("Number")
+          .appendField("freeze page for");
+      this.appendDummyInput()
+          .appendField("milliseconds");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#2E7D32");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['web_freeze'] = function(block, generator) {
+    var value_delay = generator.valueToCode(block, 'DELAY', javascript.Order.ATOMIC);
+    var code = `freezePageWithDelay(${value_delay});\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_createinput'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("create")
+          .appendField(new Blockly.FieldDropdown([["text","text"], ["password","password"], ["email","email"], ["telephone","tel"], ["search","search"], ["URL","url"], ["number","number"], ["date","date"], ["time","time"], ["date time","datetime-local"], ["month","month"], ["week","week"], ["checkbox","checkbox"], ["radio button","radio"], ["range slider","range"], ["file","file"], ["color","color"], ["hidden","hidden"], ["submit","submit"], ["reset","reset"], ["button","button"]]), "TYPE")
+          .appendField("input with");
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("id:");
+      this.appendValueInput("STYLE")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("style:");
+      this.appendValueInput("X")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("x:");
+      this.appendValueInput("Y")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("y:");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_createinput'] = function(block, generator) {
+    var dropdown_type = block.getFieldValue('TYPE');
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var value_style = generator.valueToCode(block, 'STYLE', javascript.Order.ATOMIC);
+    var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+    var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+    var code = `createCanvasInput('${dropdown_type}', ${value_id}, ${value_style}, ${value_x}, ${value_y});\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_removeallinputs'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("remove all inputs/labels");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_removeallinputs'] = function(block, generator) {
+    var code = '$(".basic-canvas-input").remove();\n';
+    return code;
+};
+
+Blockly.Blocks['canvas_removeinput'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("remove input/label");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_removeinput'] = function(block, generator) {
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var code = `$('#' + ${value_id}).remove();\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_moveinput'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("move input/label");
+      this.appendValueInput("X")
+          .setCheck("Number")
+          .appendField("to x:");
+      this.appendValueInput("Y")
+          .setCheck("Number")
+          .appendField("y:");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_moveinput'] = function(block, generator) {
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+    var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+    var code = `moveCanvasInput(${value_id}, ${value_x}, ${value_y});\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_changeinputproperty'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("change")
+          .appendField(new Blockly.FieldDropdown([["value","value"], ["checked","checked"], ["min","min"], ["max","max"], ["max length","maxlength"], ["step","step"], ["pattern","pattern"], ["disabled","disabled"], ["required","required"], ["size","size"], ["read-only","readonly"]]), "NAME")
+          .appendField("of input");
+      this.appendValueInput("VALUE")
+          .setCheck(null)
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_changeinputproperty'] = function(block, generator) {
+    var dropdown_name = block.getFieldValue('NAME');
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var code = `document.getElementById(${value_id}).${dropdown_name} = ${value_value};\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_createlabel'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("create label with");
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("id:");
+      this.appendValueInput("STYLE")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("style:");
+      this.appendValueInput("TEXT")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("text:");
+      this.appendValueInput("X")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("x:");
+      this.appendValueInput("Y")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("y:");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_createlabel'] = function(block, generator) {
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var value_style = generator.valueToCode(block, 'STYLE', javascript.Order.ATOMIC);
+    var value_text = generator.valueToCode(block, 'TEXT', javascript.Order.ATOMIC);
+    var value_x = generator.valueToCode(block, 'X', javascript.Order.ATOMIC);
+    var value_y = generator.valueToCode(block, 'Y', javascript.Order.ATOMIC);
+    var code = `createCanvasLabel(${value_id}, ${value_style}, ${value_text}, ${value_x}, ${value_y});\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_changelabeltext'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("change text of label");
+      this.appendValueInput("VALUE")
+          .setCheck("String")
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_changelabeltext'] = function(block, generator) {
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var value_value = generator.valueToCode(block, 'VALUE', javascript.Order.ATOMIC);
+    var code = `document.getElementById(${value_id}).innerHTML = ${value_value};\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_getinputproperty'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("get")
+          .appendField(new Blockly.FieldDropdown([["value","value"], ["checked","checked"], ["min","min"], ["max","max"], ["max length","maxlength"], ["step","step"], ["pattern","pattern"], ["disabled","disabled"], ["required","required"], ["size","size"], ["read-only","readonly"]]), "NAME")
+          .appendField("of input");
+      this.setOutput(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_getinputproperty'] = function(block, generator) {
+    var dropdown_name = block.getFieldValue('NAME');
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var code = `document.getElementById(${value_id}).${dropdown_name}`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_getlabeltext'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("get text of label");
+      this.setOutput(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_getlabeltext'] = function(block, generator) {
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var code = `document.getElementById(${value_id}).innerHTML`;
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_addinputeventlistener'] = {
+    init: function() {
+      this.appendValueInput("ID")
+          .setCheck("String")
+          .appendField("add event listener")
+          .appendField(new Blockly.FieldDropdown([["keydown", "keydown"], ["keyup", "keyup"], ["keypress", "keypress"], ["click", "click"], ["dblclick", "dblclick"], ["mousedown", "mousedown"], ["mouseup", "mouseup"], ["mouseover", "mouseover"], ["mouseout", "mouseout"], ["mousemove", "mousemove"], ["focus", "focus"], ["blur", "blur"], ["focusin", "focusin"], ["focusout", "focusout"], ["change", "change"], ["input", "input"], ["submit", "submit"], ["reset", "reset"], ["copy", "copy"], ["cut", "cut"], ["paste", "paste"], ["drag", "drag"], ["dragstart", "dragstart"], ["dragend", "dragend"], ["dragenter", "dragenter"], ["dragover", "dragover"], ["dragleave", "dragleave"], ["drop", "drop"], ["contextmenu", "contextmenu"], ["wheel", "wheel"], ["select", "select"]]), "NAME")
+          .appendField("for input/label");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#98795e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_addinputeventlistener'] = function(block, generator) {
+    var dropdown_name = block.getFieldValue('NAME');
+    var value_id = generator.valueToCode(block, 'ID', javascript.Order.ATOMIC);
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `document.getElementById(${value_id}).addEventListener('${dropdown_name}', function(){${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['advanced_resettimer'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("reset timer");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#555555");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['advanced_resettimer'] = function(block, generator) {
+    var code = `timer_start_time = dayjs().valueOf();\n`;
+    return code;
+};
+
+Blockly.Blocks['advanced_gettimer'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("get timer");
+      this.setOutput(true, null);
+      this.setColour("#555555");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['advanced_gettimer'] = function(block, generator) {
+    var code = `dayjs().valueOf() - timer_start_time`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };

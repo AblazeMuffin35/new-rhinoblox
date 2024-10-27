@@ -38,8 +38,8 @@ var options = {
         {controls: true,
             wheel: true,
             startScale: 0.8,
-            maxScale: 1.5,
-            minScale: 0.5,
+            maxScale: 1.4,
+            minScale: 0.4,
             scaleSpeed: 1.1,
             pinch: true},
     grid:
@@ -96,21 +96,38 @@ window.onclick = function(event) {
   }
 }
 
+document.getElementById("project-name-input").value = "project";
+
 //Special Functions
 window.onbeforeunload = function()
 {
-    return "...";
+    if (JSON.stringify(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace())) != '{}') {
+        return "...";
+    }
 }
+
+timer_start_time = dayjs().valueOf();
+
+function saveToProjectRecovery() {
+    localStorage.setItem('projectRecoveryData', JSON.stringify(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace())));
+    localStorage.setItem('projectRecoveryTimestamp', new Date().toLocaleString());
+    localStorage.setItem('projectRecoveryName', document.getElementById("project-name-input").value);
+}
+
+setInterval(saveToProjectRecovery, 60000);
 
 function resetAllSettings() {
     clearConsole();
     clearCanvas();
     forceDeleteTimers();
     clearCanvasFilter();
+    $(".basic-canvas-input").remove();
     setCanvasCursor('auto');
+    timer_start_time = dayjs().valueOf();
     canvas.width = 500;
     canvas.height = 500;
     Controller.search();
+    setInterval(saveToProjectRecovery, 60000);
 }
 
 function getCode() {
@@ -245,6 +262,8 @@ function handle_file_select( evt ) {
 
     // Read the file as text.
     reader.readAsText( fl_file );
+
+    document.getElementById("project-name-input").value = fl_file.name.replace(/\.[^/.]+$/, "");
 }
 document.getElementById('actual-btn').addEventListener('change', handle_file_select, false);
 
@@ -493,9 +512,11 @@ $(document).on("mouseup", function () {
     mouseHoldDuration = 0;
 });
 
-function loadExampleProject(project) {
+function loadExampleProject(project, name) {
     let loadedJson = JSON.parse(project);
     Blockly.serialization.workspaces.load(loadedJson, Blockly.getMainWorkspace());
+
+    document.getElementById("project-name-input").value = name;
 }
 
 document.getElementById("canvasContainer").style.cursor = "auto";
@@ -547,4 +568,42 @@ function detectTriggerChange(event) {
     else if (event.detail.name == "RIGHT_SHOULDER_BOTTOM") {
         currentControllerRightTriggers[event.detail.controllerIndex] = event.detail.value;
     }
+}
+
+function freezePageWithDelay(delay) {
+    let start_time;
+    start_time = (Number((dayjs())));
+    while ((Number((dayjs()))) < start_time + delay) {}
+}
+
+function createCanvasInput(type, id, style, x, y) {
+    let canvas_container = document.getElementById("canvasContainer");
+    let new_element = document.createElement("input");
+    new_element.type = type;
+    new_element.id = id;
+    new_element.classList.add("basic-canvas-input");
+    new_element.style.cssText = style;
+    new_element.style.position = 'absolute';
+    new_element.style.left = (canvas.getBoundingClientRect().left + x) + 'px';
+    new_element.style.top = (canvas.getBoundingClientRect().top + y) + 'px';
+    canvas_container.appendChild(new_element);
+}
+
+function moveCanvasInput(id, x, y) {
+    let selected_element = document.getElementById(id);
+    selected_element.style.left = (canvas.getBoundingClientRect().left + x) + 'px';
+    selected_element.style.top = (canvas.getBoundingClientRect().top + y) + 'px';
+}
+
+function createCanvasLabel(id, style, text, x, y) {
+    let canvas_container = document.getElementById("canvasContainer");
+    let new_element = document.createElement("label");
+    new_element.id = id;
+    new_element.innerHTML = text;
+    new_element.classList.add("basic-canvas-input");
+    new_element.style.cssText = style;
+    new_element.style.position = 'absolute';
+    new_element.style.left = (canvas.getBoundingClientRect().left + x) + 'px';
+    new_element.style.top = (canvas.getBoundingClientRect().top + y) + 'px';
+    canvas_container.appendChild(new_element);
 }

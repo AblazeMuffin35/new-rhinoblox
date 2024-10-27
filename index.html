@@ -3,14 +3,16 @@
 <head>
 <!-- RhinoBlox -->
     <title>RhinoBlox</title>
-<!-- Blockly files -->
+    <link rel="shortcut icon" href="data:image/png;base64,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"/>
+<!-- Blockly files and special APIs -->
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=Promise"></script>
+    <script src="https://unpkg.com/dayjs-with-plugins"></script>
     <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
     <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
     <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/blockly/10.3.1/blockly.min.js" integrity="sha512-T4NPanTIWuaVzkc/pnwSHo4zILLkZIIK/6pLYQjLQ+lBx7Dchw4Bqsc4GOosj4Puh3RBP6t2RBlkcN/U7HolDA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@blockly/theme-dark@6.0.5/dist/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mit-app-inventor/blockly-plugin-workspace-multiselect@0.1.11/dist/index.min.js"></script>
-<!-- Special APIs -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.js" integrity="sha512-ZHzbWDQKpcZxIT9l5KhcnwQTidZFzwK/c7gpUUsFvGjEsxPusdUCyFxjjpc7e/Wj7vLhfMujNx7COwOmzbn+2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -53,22 +55,23 @@
     <div class="topnav">
         <a class="active" href="">RhinoBlox</a>
         <a id="editorChanger" style="float: left; cursor: pointer" onclick="changeEditor()">JavaScript</a>
+        <a style="float: left" id="project-name">
+          <input type="text" id="project-name-input">
+        </a>
         <a style="cursor: pointer">
           <input type="file" accept=".rbp, .json" id="actual-btn" hidden/><label style="cursor: pointer" for="actual-btn">Load</label>
         </a>
-        <a style="cursor: pointer" onclick="downloadFile('project.rbp', JSON.stringify(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace())))">Save</a>
+        <a style="cursor: pointer" onclick="downloadFile(document.getElementById('project-name-input').value + '.rbp', JSON.stringify(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace())))">Save</a>
         <div class="dropdown">
-          <button class="dropbtn" style="cursor: pointer">Examples
-            <i class="fa fa-caret-down"></i>
-          </button>
+          <button class="dropbtn" style="cursor: pointer">Examples</button>
           <div class="dropdown-content">
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[0])">Balloon Game</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[1])">Simple Button</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[2])">Noise Generator</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[3])">Random Triangles</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[4])">RhinoBlox Logo</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[5])">Dragging</a>
-            <a style="cursor: pointer" onclick="loadExampleProject(examples[6])">Color Picker</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[0], 'Balloon Game')">Balloon Game</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[1], 'Simple Button')">Simple Button</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[2], 'Noise Generator')">Noise Generator</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[3], 'Random Triangles')">Random Triangles</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[4], 'RhinoBlox Logo')">RhinoBlox Logo</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[5], 'Dragging')">Dragging</a>
+            <a style="cursor: pointer" onclick="loadExampleProject(examples[6], 'Color Picker')">Color Picker</a>
           </div>
         </div>
       </div>
@@ -79,7 +82,7 @@
       </section>
     
       <section id="consoleContainer">
-          <button class=controlButton style="margin-right: 1px" onclick="resetAllSettings(); runCodeWithConsole()">
+          <button class=controlButton style="margin-right: 1px" onclick="saveToProjectRecovery(); resetAllSettings(); runCodeWithConsole()">
             <img draggable="false" class="controlButtonImg" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNi42MyAxNy41Ij48ZGVmcz48c3R5bGU+LmNscy0xLC5jbHMtMntmaWxsOiM0Y2JmNTY7c3Ryb2tlOiM0NTk5M2Q7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO30uY2xzLTJ7c3Ryb2tlLXdpZHRoOjEuNXB4O308L3N0eWxlPjwvZGVmcz48dGl0bGU+aWNvbi0tZ3JlZW4tZmxhZzwvdGl0bGU+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNLjc1LDJBNi40NCw2LjQ0LDAsMCwxLDguNDQsMmgwYTYuNDQsNi40NCwwLDAsMCw3LjY5LDBWMTIuNGE2LjQ0LDYuNDQsMCwwLDEtNy42OSwwaDBhNi40NCw2LjQ0LDAsMCwwLTcuNjksMCIvPjxsaW5lIGNsYXNzPSJjbHMtMiIgeDE9IjAuNzUiIHkxPSIxNi43NSIgeDI9IjAuNzUiIHkyPSIwLjc1Ii8+PC9zdmc+">
           </button>
           <button class=controlButton style="margin-right: 0px; margin-left: 0px; padding: 0px" onclick="resetAllSettings()">
@@ -113,7 +116,6 @@
         </category>
         <sep></sep> -->
         <category name="WebUtils" colour="#2E7D32">
-          <block type="web_time"></block>
           <block type="web_browser"></block>
           <block type="web_language"></block>
           <block type="web_online"></block>
@@ -254,6 +256,13 @@
               </shadow>
             </value>
           </block>
+          <block type="web_freeze">
+            <value name="DELAY">
+              <shadow type="math_number">
+                <field name="NUM">1000</field>
+              </shadow>
+            </value>
+          </block>
           <block type="web_print"></block>
         </category>
         <category name="Chroma" colour="#9e4d45">
@@ -345,13 +354,6 @@
               </shadow>
             </value>
           </block>
-          <block type="chroma_invertcolor">
-            <value name="COLOR">
-              <shadow type="colour_picker">
-                <field name="COLOUR">#ff0000</field>
-              </shadow>
-            </value>
-          </block>
           <block type="chroma_convert">
             <value name="COLOR">
               <shadow type="colour_picker">
@@ -359,6 +361,54 @@
               </shadow>
             </value>
           </block>
+        </category>
+        <category name="Dates" colour="#d17896">
+          <block type="dates_currentdate"></block>
+          <block type="dates_date">
+            <value name="INPUT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="FORMAT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="dates_valid"></block>
+          <block type="dates_get"></block>
+          <block type="dates_set">
+            <value name="VALUE">
+              <shadow type="math_number">
+                <field name="NUM">0</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="dates_add">
+            <value name="VALUE">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="dates_subtract">
+            <value name="VALUE">
+              <shadow type="math_number">
+                <field name="NUM">1</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="dates_format">
+            <value name="FORMAT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="dates_fromnow"></block>
+          <block type="dates_beforeafter"></block>
+          <block type="dates_between"></block>
         </category>
         <category name="Controller" colour="#1f618d">
           <block type="controller_connected"></block>
@@ -736,6 +786,7 @@
         <category name="Types" colour="90">
           <block type="types_strictlyequals"></block>
           <block type="types_typeof"></block>
+          <block type="types_instanceof"></block>
           <block type="types_tostring"></block>
           <block type="types_tonumber"></block>
           <block type="types_toboolean"></block>
@@ -859,39 +910,6 @@
           </block>
         </category> -->
         <category name="Canvas Data" colour="190">
-          <block type="canvas_image"></block>
-          <block type="canvas_width"></block>
-          <block type="canvas_height"></block>
-          <block type="canvas_resize">
-            <value name="WIDTH">
-              <shadow type="math_number">
-                <field name="NUM">500</field>
-              </shadow>
-            </value>
-            <value name="HEIGHT">
-              <shadow type="math_number">
-                <field name="NUM">500</field>
-              </shadow>
-            </value>
-          </block>
-          <block type="canvas_getbg"></block>
-          <block type="canvas_changebg">
-            <value name="COLOR">
-              <shadow type="colour_picker">
-                <field name="COLOUR">#ffffff</field>
-              </shadow>
-            </value>
-          </block>
-          <block type="canvas_getfilter"></block>
-          <block type="canvas_setfilter">
-            <value name="VALUE">
-              <shadow type="text">
-                <field name="TEXT">5px</field>
-              </shadow>
-            </value>
-          </block>
-          <block type="canvas_clearfilter"></block>
-          <label text=" "></label>
           <block type="canvas_getmousex"></block>
           <block type="canvas_getmousey"></block>
           <block type="canvas_mousedown"></block>
@@ -942,6 +960,39 @@
           </block>
           <block type="canvas_checkkeydown"></block>
           <block type="canvas_lastkey"></block>
+          <label text=" "></label>
+          <block type="canvas_image"></block>
+          <block type="canvas_width"></block>
+          <block type="canvas_height"></block>
+          <block type="canvas_resize">
+            <value name="WIDTH">
+              <shadow type="math_number">
+                <field name="NUM">500</field>
+              </shadow>
+            </value>
+            <value name="HEIGHT">
+              <shadow type="math_number">
+                <field name="NUM">500</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getbg"></block>
+          <block type="canvas_changebg">
+            <value name="COLOR">
+              <shadow type="colour_picker">
+                <field name="COLOUR">#ffffff</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getfilter"></block>
+          <block type="canvas_setfilter">
+            <value name="VALUE">
+              <shadow type="text">
+                <field name="TEXT">5px</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_clearfilter"></block>
           <label text=" "></label>
           <block type="canvas_getcursor"></block>
           <block type="canvas_setcursor"></block>
@@ -1223,7 +1274,124 @@
             </value>
           </block>
         </category>
+        <category name="Canvas Input" colour="#98795e">
+          <block type="canvas_removeallinputs"></block>
+          <block type="canvas_createinput">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="STYLE">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="X">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_createlabel">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="STYLE">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="TEXT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="X">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_removeinput">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_moveinput">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="X">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+            <value name="Y">
+              <shadow type="math_number">
+                <field name="NUM">10</field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getinputproperty">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_changeinputproperty">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_getlabeltext">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_changelabeltext">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="VALUE">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="canvas_addinputeventlistener">
+            <value name="ID">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+        </category>
         <category name="Console" colour="#72503e">
+          <block type="console_debugger"></block>
           <block type="test_getconsole"></block>
           <block type="test_clear"></block>
           <block type="test_write">
@@ -1247,8 +1415,9 @@
           </block>
         </category>
         <category name="Advanced" colour="#555555">
-          <block type="advanced_flipdisplay"></block>
-          <block type="advanced_addeventlistener"></block>
+          <block type="advanced_gettimer"></block>
+          <block type="advanced_resettimer"></block>
+          <block type="advanced_pressbutton"></block>
           <block type="test_try"></block>
           <block type="test_inline_function"></block>
           <block type="advanced_jseval">
@@ -1274,7 +1443,7 @@
       </xml>
 
       <div class="footer">
-        <a style="float: left; padding: 0px 15px" id="creditsModalBtn" class="credits-link">Credits</a><a href="https://discord.gg/YwdvExN82q" target="_blank" style="float: right; padding: 0px 15px" class="credits-link">Discord</a>
+        <a style="float: left; padding: 0px 15px" id="creditsModalBtn" class="credits-link">Credits</a><a href="https://discord.gg/YwdvExN82q" target="_blank" style="float: right; padding: 0px 15px" class="credits-link">Discord</a><b style="float: right; padding: 0px 0px; color: #a6a5ab">|</b><a href="recovery/index.html" target="_blank" style="float: right; padding: 0px 15px" class="credits-link">Project Recovery</a>
       </div>
 
       <!-- Initialize Blockly -->

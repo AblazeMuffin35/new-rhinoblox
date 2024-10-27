@@ -240,3 +240,31 @@ body
 .credits-modal-separator {
     color: #a6a5ab;
 }
+
+#project-name:hover {
+    background-color: unset;
+}
+
+#project-name {
+    padding: 11px;
+}
+
+#project-name-input {
+    border: solid #4c4a56 2px;
+    border-radius: 20px;
+    width: 150px;
+    height: 20px;
+    background-color: #2c2a36;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 17px;
+}
+
+#project-name-input:focus {
+    outline: none;
+}
+
+.basic-canvas-input:focus {
+    outline: none;
+}
