@@ -26,3 +26,5 @@ function clearAllData() {
     localStorage.removeItem('projectRecoveryData');
     location.reload();
 }
+
+/*2.6 Bug-Fix*/
