@@ -108,6 +108,8 @@ window.onbeforeunload = function()
 
 timer_start_time = dayjs().valueOf();
 
+var socketio;
+
 function saveToProjectRecovery() {
     localStorage.setItem('projectRecoveryData', JSON.stringify(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace())));
     localStorage.setItem('projectRecoveryTimestamp', new Date().toLocaleString());
@@ -128,6 +130,10 @@ function resetAllSettings() {
     canvas.height = 500;
     Controller.search();
     setInterval(saveToProjectRecovery, 60000);
+    if (typeof socketio != 'undefined') {
+        socketio.disconnect();
+        socketio = undefined;
+    }
 }
 
 function getCode() {

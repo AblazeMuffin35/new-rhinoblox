@@ -864,7 +864,7 @@ Blockly.Blocks['test_try'] = {
           .setCheck(null);
       this.appendDummyInput()
           .appendField("catch")
-          .appendField(new Blockly.FieldVariable("error"), "ERROR");
+          .appendField(new Blockly.FieldTextInput("error"), "ERROR");
       this.appendStatementInput("CATCH")
           .setCheck(null);
       this.setPreviousStatement(true, null);
@@ -876,9 +876,9 @@ Blockly.Blocks['test_try'] = {
 };
 javascript.javascriptGenerator.forBlock['test_try'] = function(block, generator) {
     var statements_try = generator.statementToCode(block, 'TRY');
-    var variable_error = generator.nameDB_.getName(block.getFieldValue('ERROR'), Blockly.Variables.NAME_TYPE);
+    var variable_error = block.getFieldValue('ERROR');
     var statements_catch = generator.statementToCode(block, 'CATCH');
-    var code = `try{\n${statements_try}}\ncatch(error){\n${statements_catch}}\n`;
+    var code = `try{\n${statements_try}}\ncatch(${variable_error}){\n${statements_catch}}\n`;
     return code;
 };
 
@@ -3609,4 +3609,175 @@ Blockly.Blocks['advanced_gettimer'] = {
 javascript.javascriptGenerator.forBlock['advanced_gettimer'] = function(block, generator) {
     var code = `dayjs().valueOf() - timer_start_time`;
     return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['server_connect'] = {
+    init: function() {
+      this.appendValueInput("ADDRESS")
+          .setCheck("String")
+          .appendField("connect to server");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_connect'] = function(block, generator) {
+    var value_address = generator.valueToCode(block, 'ADDRESS', javascript.Order.ATOMIC);
+    var code = `socketio = io(${value_address});\n`;
+    return code;
+};
+
+Blockly.Blocks['server_sendpacket'] = {
+    init: function() {
+      this.appendValueInput("TYPE")
+          .setCheck("String")
+          .appendField("send");
+      this.appendValueInput("TEXT")
+          .setCheck("String")
+          .appendField("packet with text");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_sendpacket'] = function(block, generator) {
+    var value_type = generator.valueToCode(block, 'TYPE', javascript.Order.ATOMIC);
+    var value_text = generator.valueToCode(block, 'TEXT', javascript.Order.ATOMIC);
+    var code = `socketio.emit(${value_type}, ${value_text}, 'everyone');\n`;
+    return code;
+};
+
+Blockly.Blocks['server_sendpacketto'] = {
+    init: function() {
+      this.appendValueInput("TYPE")
+          .setCheck("String")
+          .appendField("send");
+      this.appendValueInput("TEXT")
+          .setCheck("String")
+          .appendField("packet with text");
+      this.appendValueInput("TO")
+          .setCheck("String")
+          .appendField("to");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_sendpacketto'] = function(block, generator) {
+    var value_type = generator.valueToCode(block, 'TYPE', javascript.Order.ATOMIC);
+    var value_text = generator.valueToCode(block, 'TEXT', javascript.Order.ATOMIC);
+    var value_to = generator.valueToCode(block, 'TO', javascript.Order.ATOMIC);
+    var code = `socketio.emit(${value_type}, ${value_text}, ${value_to});\n`;
+    return code;
+};
+
+Blockly.Blocks['server_mysocketid'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("my socket");
+      this.setOutput(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_mysocketid'] = function(block, generator) {
+    var code = 'socketio.id';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['server_onpacket'] = {
+    init: function() {
+      this.appendValueInput("TYPE")
+          .setCheck("String")
+          .appendField("when");
+      this.appendDummyInput()
+          .appendField("packet by")
+          .appendField(new Blockly.FieldTextInput("socket"), "VAR_SOCKET")
+          .appendField("received with")
+          .appendField(new Blockly.FieldTextInput("text"), "VAR_TEXT");
+      this.appendStatementInput("CODE")
+          .setCheck(null)
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_onpacket'] = function(block, generator) {
+    var value_type = generator.valueToCode(block, 'TYPE', javascript.Order.ATOMIC);
+    var var_socket = block.getFieldValue('VAR_SOCKET');
+    var var_text = block.getFieldValue('VAR_TEXT');
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `socketio.on(${value_type}, (${var_text}, ${var_socket}) => {\n${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['server_onconnect'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("when")
+          .appendField(new Blockly.FieldTextInput("socket"), "VAR")
+          .appendField("connected");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_onconnect'] = function(block, generator) {
+    var text_var = block.getFieldValue('VAR');
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `socketio.on('clientConnected', ${text_var} => {\n${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['server_ondisconnect'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("when")
+          .appendField(new Blockly.FieldTextInput("socket"), "VAR")
+          .appendField("disconnected");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_ondisconnect'] = function(block, generator) {
+    var text_var = block.getFieldValue('VAR');
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `socketio.on('clientDisconnected', ${text_var} => {\n${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['server_disconnect'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("disconnect from server");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_disconnect'] = function(block, generator) {
+    var code = 'socketio.disconnect();\nsocketio = undefined;\n';
+    return code;
 };
