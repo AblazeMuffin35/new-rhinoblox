@@ -448,6 +448,7 @@
         </category>
         <category name="Server" colour="#c99a24">
           <block type="server_mysocketid"></block>
+          <block type="server_checkconnected"></block>
           <block type="server_connect">
             <value name="ADDRESS">
               <shadow type="text">
@@ -1060,6 +1061,9 @@
               </shadow>
             </value>
           </block>
+          <label text=" "></label>
+          <block type="canvas_whenkeypressed"></block>
+          <block type="canvas_whenkeyreleased"></block>
         </category>
         <category name="Canvas" colour="60">
           <block type="canvas_clear"></block>
@@ -1470,6 +1474,25 @@
               </shadow>
             </value>
           </block>
+          <block type="test_stylewrite">
+            <value name="INPUT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+            <value name="STYLE">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
+          <block type="test_htmlwrite">
+            <value name="INPUT">
+              <shadow type="text">
+                <field name="TEXT"></field>
+              </shadow>
+            </value>
+          </block>
         </category>
         <category name="Advanced" colour="#555555">
           <block type="advanced_gettimer"></block>
@@ -1495,8 +1518,8 @@
         <sep></sep>
         <category name="Variables" categorystyle="variable_category" custom="VARIABLE">
         </category>
-        <category name="Functions" categorystyle="procedure_category"
-        custom="PROCEDURE"></category>
+        <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE">
+        </category>
       </xml>
 
       <div class="footer">

@@ -59,12 +59,12 @@ multiselectPlugin.init(options);
 //Inject Monaco Editor
 require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs' }});
 require(["vs/editor/editor.main"], () => {
-  monaco.editor.create(document.getElementById('monacoEditor'), {
-    value: ``,
-    language: 'javascript',
-    theme: 'vs-dark',
-    automaticLayout: true,
-    readOnly: true
+    monaco.editor.create(document.getElementById('monacoEditor'), {
+        value: '',
+        language: 'javascript',
+        theme: 'vs-dark',
+        automaticLayout: true,
+        readOnly: true
   });
 });
 
@@ -134,6 +134,7 @@ function resetAllSettings() {
         socketio.disconnect();
         socketio = undefined;
     }
+    clearKeyEvents();
 }
 
 function getCode() {
@@ -157,7 +158,7 @@ function runCodeWithConsole() {
                     $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #398cd6'>" + result + "</span><br>"); console.push(result);
                     break;
                 case "function":
-                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #ffde71'>" + result + "</span><br>"); console.push(result);
+                    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: #dcdcaa'>" + result + "</span><br>"); console.push(result);
                     break;
                 default:
                     if (result == undefined || result == null) {
@@ -385,14 +386,36 @@ function clearConsole(){
 }
 
 function writeConsole(input){
-    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span>" + input + "<br>");
+    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span>" + encodeHtml(input) + "<br>");
     console.push(input);
 }
 
 function colorwriteConsole(input, color){
-    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: " + color + "'>" + input + "<br>");
+    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='color: " + color + "'>" + encodeHtml(input) + "<br>");
     console.push(input);
 }
+
+function stylewriteConsole(input, style){
+    $("#console").html($("#console").html() + "<span style='color: #505050'>&nbsp> </span><span style='" + style + "'>" + encodeHtml(input) + "<br>");
+    console.push(input);
+}
+
+function htmlwriteConsole(input){
+    $("#console").html($("#console").html() + input);
+    console.push(input);
+}
+
+/*
+function sameWriteConsole(input){
+    $("#console").html($("#console").html() + input);
+    console.push(input);
+}
+
+function sameColorwriteConsole(input, color){
+    $("#console").html($("#console").html() + "<span style='color: " + color + "'>" + input);
+    console.push(input);
+}
+*/
 
 function forceDeleteTimers(){
     //This function may sometimes clear timers that you don't want to clear!
@@ -612,4 +635,35 @@ function createCanvasLabel(id, style, text, x, y) {
     new_element.style.left = (canvas.getBoundingClientRect().left + x) + 'px';
     new_element.style.top = (canvas.getBoundingClientRect().top + y) + 'px';
     canvas_container.appendChild(new_element);
+}
+
+function checkConnected() {
+    try {
+        return socketio.connected;
+    } catch (e) {
+        return false;
+    }
+}
+
+function clearKeyEvents() {
+    $(document).off("keydown");
+
+    $(document).off("keyup");
+
+    $(document).on("keydown", function (e) {
+        currentKey = e.key;
+        currentKeyLocation = e.originalEvent.location;
+    });
+    
+    $(document).on("keyup", function (e) {
+        currentKey = 'noKeyCurrentlyPressed';
+    });
+}
+
+function encodeHtml(string)
+{
+  var el = document.createElement("div");
+  el.innerText = el.textContent = string;
+  string = el.innerHTML;
+  return string;
 }

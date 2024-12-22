@@ -885,7 +885,7 @@ javascript.javascriptGenerator.forBlock['test_try'] = function(block, generator)
 Blockly.Blocks['test_inline_function'] = {
     init: function() {
       this.appendDummyInput()
-          .appendField("inline function");
+          .appendField("run inline function");
       this.appendStatementInput("FUNCTION")
           .setCheck(null);
       this.appendValueInput("RETURN")
@@ -961,6 +961,74 @@ javascript.javascriptGenerator.forBlock['test_colorwrite'] = function(block, gen
     var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
     var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
     var code = `colorwriteConsole(${value_input}, ${value_color});\n`;
+    return code;
+};
+
+Blockly.Blocks['test_stylewrite'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("write");
+      this.appendValueInput("STYLE")
+          .setCheck(null)
+          .appendField("on console with style");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#72503e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['test_stylewrite'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_style = generator.valueToCode(block, 'STYLE', javascript.Order.ATOMIC);
+    var code = `stylewriteConsole(${value_input}, ${value_style});\n`;
+    return code;
+};
+
+Blockly.Blocks['test_nobreakwrite'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("write");
+      this.appendDummyInput()
+          .appendField("on console without breaking");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#72503e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['test_nobreakwrite'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var code = `sameWriteConsole(${value_input});\n`;
+    return code;
+};
+
+Blockly.Blocks['test_nobreakcolorwrite'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("write");
+      this.appendValueInput("COLOR")
+          .setCheck(null)
+          .appendField("on console with color");
+      this.appendDummyInput()
+          .appendField("without breaking");
+      this.setInputsInline(true);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#72503e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['test_nobreakcolorwrite'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var value_color = generator.valueToCode(block, 'COLOR', javascript.Order.ATOMIC);
+    var code = `sameColorwriteConsole(${value_input}, ${value_color});\n`;
     return code;
 };
 
@@ -1893,7 +1961,7 @@ Blockly.Blocks['canvas_checkkeydown'] = {
     init: function() {
       this.appendDummyInput()
           .appendField("key")
-          .appendField(new Blockly.FieldDropdown([["a", "a"], ["b", "b"], ["c", "c"], ["d", "d"], ["e", "e"], ["f", "f"], ["g", "g"], ["h", "h"], ["i", "i"], ["j", "j"], ["k", "k"], ["l", "l"], ["m", "m"], ["n", "n"], ["o", "o"], ["p", "p"], ["q", "q"], ["r", "r"], ["s", "s"], ["t", "t"], ["u", "u"], ["v", "v"], ["w", "w"], ["x", "x"], ["y", "y"], ["z", "z"], ["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["!", "!"], ["@", "@"], ["#", "#"], ["$", "$"], ["%", "%"], ["^", "^"], ["&", "&"], ["*", "*"], ["(", "("], [")", ")"], ["-", "-"], ["_", "_"], ["=", "="], ["+", "+"], ["[", "["], ["{", "{"], ["]", "]"], ["}", "}"], ["\\", "\\"], ["|", "|"], [";", ";"], [":", ":"], ["'", "'"], ["\"", "\""], [",", ","], ["<", "<"], [".", "."], [">", ">"], ["/", "/"], ["?", "?"], ["`", "`"], ["~", "~"], [" ", " "], ["Enter", "Enter"], ["Tab", "Tab"], ["Backspace", "Backspace"], ["Shift", "Shift"], ["Control", "Control"], ["Alt", "Alt"], ["Meta", "Meta"], ["AltGraph", "AltGraph"], ["CapsLock", "CapsLock"], ["NumLock", "NumLock"], ["ScrollLock", "ScrollLock"], ["ArrowUp", "ArrowUp"], ["ArrowDown", "ArrowDown"], ["ArrowLeft", "ArrowLeft"], ["ArrowRight", "ArrowRight"], ["Home", "Home"], ["End", "End"], ["PageUp", "PageUp"], ["PageDown", "PageDown"], ["F1", "F1"], ["F2", "F2"], ["F3", "F3"], ["F4", "F4"], ["F5", "F5"], ["F6", "F6"], ["F7", "F7"], ["F8", "F8"], ["F9", "F9"], ["F10", "F10"], ["F11", "F11"], ["F12", "F12"], ["Insert", "Insert"], ["Delete", "Delete"], ["Clear", "Clear"], ["Escape", "Escape"], ["Pause", "Pause"], ["PrintScreen", "PrintScreen"], ["ContextMenu", "ContextMenu"]]), "KEY")
+          .appendField(new Blockly.FieldDropdown([["a", "a"], ["b", "b"], ["c", "c"], ["d", "d"], ["e", "e"], ["f", "f"], ["g", "g"], ["h", "h"], ["i", "i"], ["j", "j"], ["k", "k"], ["l", "l"], ["m", "m"], ["n", "n"], ["o", "o"], ["p", "p"], ["q", "q"], ["r", "r"], ["s", "s"], ["t", "t"], ["u", "u"], ["v", "v"], ["w", "w"], ["x", "x"], ["y", "y"], ["z", "z"], ["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["!", "!"], ["@", "@"], ["#", "#"], ["$", "$"], ["%", "%"], ["^", "^"], ["&", "&"], ["*", "*"], ["(", "("], [")", ")"], ["-", "-"], ["_", "_"], ["=", "="], ["+", "+"], ["[", "["], ["{", "{"], ["]", "]"], ["}", "}"], ["\\", "\\"], ["|", "|"], [";", ";"], [":", ":"], ["'", "'"], ["\"", "\""], [",", ","], ["<", "<"], [".", "."], [">", ">"], ["/", "/"], ["?", "?"], ["`", "`"], ["~", "~"], ["Space", " "], ["Enter", "Enter"], ["Tab", "Tab"], ["Backspace", "Backspace"], ["Shift", "Shift"], ["Control", "Control"], ["Alt", "Alt"], ["Meta", "Meta"], ["AltGraph", "AltGraph"], ["CapsLock", "CapsLock"], ["NumLock", "NumLock"], ["ScrollLock", "ScrollLock"], ["ArrowUp", "ArrowUp"], ["ArrowDown", "ArrowDown"], ["ArrowLeft", "ArrowLeft"], ["ArrowRight", "ArrowRight"], ["Home", "Home"], ["End", "End"], ["PageUp", "PageUp"], ["PageDown", "PageDown"], ["F1", "F1"], ["F2", "F2"], ["F3", "F3"], ["F4", "F4"], ["F5", "F5"], ["F6", "F6"], ["F7", "F7"], ["F8", "F8"], ["F9", "F9"], ["F10", "F10"], ["F11", "F11"], ["F12", "F12"], ["Insert", "Insert"], ["Delete", "Delete"], ["Clear", "Clear"], ["Escape", "Escape"], ["Pause", "Pause"], ["PrintScreen", "PrintScreen"], ["ContextMenu", "ContextMenu"]]), "KEY")
           .appendField("pressed with location")
           .appendField(new Blockly.FieldDropdown([["any","any"], ["standard","0"], ["left","1"], ["right","2"], ["numpad","3"]]), "LOCATION")
           .appendField("?");
@@ -3779,5 +3847,84 @@ Blockly.Blocks['server_disconnect'] = {
 };
 javascript.javascriptGenerator.forBlock['server_disconnect'] = function(block, generator) {
     var code = 'socketio.disconnect();\nsocketio = undefined;\n';
+    return code;
+};
+
+Blockly.Blocks['server_checkconnected'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("is socket connected?");
+      this.setOutput(true, "Boolean");
+      this.setColour("#c99a24");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['server_checkconnected'] = function(block, generator) {
+    var code = 'checkConnected()';
+    return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+Blockly.Blocks['canvas_whenkeypressed'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("when key")
+          .appendField(new Blockly.FieldTextInput("key"), "KEY")
+          .appendField("pressed");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_whenkeypressed'] = function(block, generator) {
+    var text_key = block.getFieldValue('KEY');
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `$(document).on("keydown", function (e) {\nlet ${text_key} = e.key;\n${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['canvas_whenkeyreleased'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("when key")
+          .appendField(new Blockly.FieldTextInput("key"), "KEY")
+          .appendField("released");
+      this.appendStatementInput("CODE")
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['canvas_whenkeyreleased'] = function(block, generator) {
+    var text_key = block.getFieldValue('KEY');
+    var statements_code = generator.statementToCode(block, 'CODE');
+    var code = `$(document).on("keyup", function (e) {\nlet ${text_key} = e.key;\n${statements_code}});\n`;
+    return code;
+};
+
+Blockly.Blocks['test_htmlwrite'] = {
+    init: function() {
+      this.appendValueInput("INPUT")
+          .setCheck(null)
+          .appendField("embed HTML");
+      this.appendDummyInput()
+          .appendField("in console");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour("#72503e");
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+};
+javascript.javascriptGenerator.forBlock['test_htmlwrite'] = function(block, generator) {
+    var value_input = generator.valueToCode(block, 'INPUT', javascript.Order.ATOMIC);
+    var code = `htmlwriteConsole(${value_input});\n`;
     return code;
 };
