@@ -28,4 +28,4 @@ Here are some links related to RhinoBlox and its features:
 
 - **RhinoBlox Legacy:** https://ablazemuffin35.github.io/rhinoblox/
 
-- **RhinoBlox Server Address:** https://8czgkkcr-8080.euw.devtunnels.ms/
+- **RhinoBlox Server Address:** https://gp9lvv0l-8080.euw.devtunnels.ms/
